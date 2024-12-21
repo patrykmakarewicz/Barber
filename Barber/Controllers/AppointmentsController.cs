@@ -72,6 +72,28 @@ namespace YourProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public IActionResult Create(DateTime? dateTime)
+        {
+            var appointment = new Appointment();
+
+            if (dateTime.HasValue)
+            {
+                appointment.AppointmentDate = dateTime.Value;
+            }
+            else
+            {
+                appointment.AppointmentDate = DateTime.Now;
+            }
+            ViewBag.Customers = _context.Customers.ToList();
+            ViewBag.Services = _context.Services.ToList();
+            ViewBag.Employees = _context.Employees.ToList();
+
+            return View(appointment);
+        }
+
+
+
         // GET: Appointments/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
@@ -180,5 +202,29 @@ namespace YourProject.Controllers
         {
             return _context.Appointments.Any(e => e.Id == id);
         }
+
+        public IActionResult Calendar(int weekOffset = 0)
+        {
+            DateTime today = DateTime.Now.Date;
+            int diff = (7 + (today.DayOfWeek - DayOfWeek.Monday)) % 7;
+            DateTime startOfThisWeek = today.AddDays(-1 * diff);
+            DateTime startOfWeek = startOfThisWeek.AddDays(7 * weekOffset);
+
+            var endOfWeek = startOfWeek.AddDays(7);
+            var appointments = _context.Appointments
+                .Include(a => a.Service)
+                .Include(a => a.Customer)
+                .Include(a => a.Employee)
+                .Where(a => a.AppointmentDate >= startOfWeek && a.AppointmentDate < endOfWeek)
+                .ToList();
+
+
+
+            ViewBag.StartOfWeek = startOfWeek;
+            ViewBag.Appointments = appointments;
+
+            return View("Calendar"); // lub po prostu View()
+        }
+
     }
 }

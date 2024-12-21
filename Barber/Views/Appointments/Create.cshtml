@@ -1,5 +1,4 @@
-﻿@* Views/Appointments/Create.cshtml *@
-@model Barber.Models.Appointment
+﻿@model Barber.Models.Appointment
 
 @{
     ViewBag.Title = "Dodaj Wizytę";
@@ -19,7 +18,6 @@
             }
         </select>
     </div>
-
     <div class="col-md-4">
         <label class="form-label">Usługa:</label>
         <select name="ServiceId" class="form-select">
@@ -29,7 +27,6 @@
             }
         </select>
     </div>
-
     <div class="col-md-4">
         <label class="form-label">Pracownik (opcjonalnie):</label>
         <select name="EmployeeId" class="form-select">
@@ -43,7 +40,9 @@
 
     <div class="col-md-4">
         <label class="form-label">Data wizyty:</label>
-        <input type="datetime-local" name="AppointmentDate" class="form-control" />
+        <input type="datetime-local" name="AppointmentDate"
+               class="form-control"
+               value="@Model.AppointmentDate.ToString("yyyy-MM-ddTHH:mm")" />
     </div>
 
     <div class="col-md-4">

@@ -1,0 +1,64 @@
+﻿@model Barber.Models.Appointment
+
+@{
+    // Przykładowe listy days i hours, jak poprzednio
+    DateTime startOfWeek = ViewBag.StartOfWeek ?? DateTime.Now.Date;
+    var days = Enumerable.Range(0, 7)
+                         .Select(offset => startOfWeek.AddDays(offset))
+                         .ToList();
+    var hours = Enumerable.Range(8, 11).ToList(); // np. 8..18
+    var appointments = ViewBag.Appointments as List<Barber.Models.Appointment>
+                       ?? new List<Barber.Models.Appointment>();
+}
+
+<h2>Kalendarz Wizyt</h2>
+
+<table class="table table-bordered table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th style="width: 100px;">Godzina</th>
+            @foreach (var day in days)
+            {
+                <th class="text-center">
+                    @day.ToString("dddd dd MMM",
+                             System.Globalization.CultureInfo.GetCultureInfo("pl-PL"))
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hour in hours)
+        {
+            <tr>
+                <td class="fw-bold">@hour:00</td>
+                @foreach (var day in days)
+                {
+                    var slotDate = new DateTime(day.Year, day.Month, day.Day, hour, 0, 0);
+                    var appt = appointments.FirstOrDefault(a => a.AppointmentDate == slotDate);
+
+                    if (appt != null)
+                    {
+                        <td class="text-center bg-info text-white">
+                            <a class="text-white text-decoration-none"
+                               href="@Url.Action("Edit", "Appointments", new { id = appt.Id })"
+                               title="Edytuj wizytę">
+                                @appt.Service?.Name
+                            </a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="text-center">
+                            <a href="@Url.Action("Create", "Appointments", new { dateTime = slotDate })"
+                               class="d-block text-decoration-none"
+                               style="min-height: 2em;"
+                               title="Dodaj wizytę w tym terminie">
+                            </a>
+                        </td>
+                    }
+
+                }
+            </tr>
+        }
+    </tbody>
+</table>
