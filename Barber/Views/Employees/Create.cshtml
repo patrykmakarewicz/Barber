@@ -1,19 +1,29 @@
-﻿@model Barber.Models.Employee
+﻿@* Views/Employees/Create.cshtml *@
+@model Barber.Models.Employee
 
-<h2>Dodaj Pracownika</h2>
+@{
+    ViewBag.Title = "Dodaj Pracownika";
+}
 
-<form method="post">
-    <label>Imię:</label>
-    <input type="text" name="FirstName" />
-    <br />
+<h2 class="mb-4">Dodaj Pracownika</h2>
+@Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
 
-    <label>Nazwisko:</label>
-    <input type="text" name="LastName" />
-    <br />
+<form method="post" class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Imię:</label>
+        <input type="text" name="FirstName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Nazwisko:</label>
+        <input type="text" name="LastName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Specjalizacja:</label>
+        <input type="text" name="Specialization" class="form-control" />
+    </div>
 
-    <label>Specjalizacja:</label>
-    <input type="text" name="Specialization" />
-    <br />
-
-    <input type="submit" value="Zapisz" />
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Zapisz</button>
+        <a class="btn btn-secondary" href="@Url.Action("Index","Employees")">Anuluj</a>
+    </div>
 </form>

@@ -1,43 +1,63 @@
-﻿@model Barber.Models.Appointment
+﻿@* Views/Appointments/Create.cshtml *@
+@model Barber.Models.Appointment
+
 @{
     ViewBag.Title = "Dodaj Wizytę";
 }
-@Html.ValidationSummary(true)
 
-<h2>Dodaj Wizytę</h2>
+<h2 class="mb-4">Dodaj Wizytę</h2>
 
-<form method="post">
-    <label>Klient:</label>
-    <select name="CustomerId">
-        @foreach (var c in ViewBag.Customers)
-        {
-            <option value="@c.Id">@c.FirstName @c.LastName</option>
-        }
-    </select>
-    <br />
+@Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
 
-    <label>Usługa:</label>
-    <select name="ServiceId">
-        @foreach (var s in ViewBag.Services)
-        {
-            <option value="@s.Id">@s.Name</option>
-        }
-    </select>
-    <br />
+<form method="post" class="row g-3">
+    <div class="col-md-4">
+        <label class="form-label">Klient:</label>
+        <select name="CustomerId" class="form-select">
+            @foreach (var c in ViewBag.Customers)
+            {
+                <option value="@c.Id">@c.FirstName @c.LastName</option>
+            }
+        </select>
+    </div>
 
-    <label>Pracownik (opcjonalnie):</label>
-    <select name="EmployeeId">
-        <option value="">--Wybierz--</option>
-        @foreach (var e in ViewBag.Employees)
-        {
-            <option value="@e.Id">@e.FirstName @e.LastName</option>
-        }
-    </select>
-    <br />
+    <div class="col-md-4">
+        <label class="form-label">Usługa:</label>
+        <select name="ServiceId" class="form-select">
+            @foreach (var s in ViewBag.Services)
+            {
+                <option value="@s.Id">@s.Name</option>
+            }
+        </select>
+    </div>
 
-    <label>Data wizyty:</label>
-    <input type="datetime-local" name="AppointmentDate" />
-    <br />
+    <div class="col-md-4">
+        <label class="form-label">Pracownik (opcjonalnie):</label>
+        <select name="EmployeeId" class="form-select">
+            <option value="">--Wybierz--</option>
+            @foreach (var e in ViewBag.Employees)
+            {
+                <option value="@e.Id">@e.FirstName @e.LastName</option>
+            }
+        </select>
+    </div>
 
-    <input type="submit" value="Zapisz" />
+    <div class="col-md-4">
+        <label class="form-label">Data wizyty:</label>
+        <input type="datetime-local" name="AppointmentDate" class="form-control" />
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Status:</label>
+        <select name="Status" class="form-select">
+            @foreach (var status in Enum.GetValues(typeof(Barber.Models.AppointmentStatus)))
+            {
+                <option value="@status">@status</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Zapisz</button>
+        <a class="btn btn-secondary" href="@Url.Action("Index","Appointments")">Anuluj</a>
+    </div>
 </form>

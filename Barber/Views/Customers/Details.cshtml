@@ -1,10 +1,24 @@
-﻿@model Barber.Models.Customer
+﻿@* Views/Customers/Details.cshtml *@
+@model Barber.Models.Customer
 
-<h2>Szczegóły Klienta</h2>
+@{
+    ViewBag.Title = "Szczegóły Klienta";
+}
 
-<p><strong>Imię:</strong> @Model.FirstName</p>
-<p><strong>Nazwisko:</strong> @Model.LastName</p>
-<p><strong>Telefon:</strong> @Model.PhoneNumber</p>
-<p><strong>Email:</strong> @Model.Email</p>
+<h2 class="mb-4">Szczegóły Klienta</h2>
 
-<a href="@Url.Action("Index","Customers")">Powrót do listy</a>
+<dl class="row">
+    <dt class="col-sm-3">Imię</dt>
+    <dd class="col-sm-9">@Model.FirstName</dd>
+
+    <dt class="col-sm-3">Nazwisko</dt>
+    <dd class="col-sm-9">@Model.LastName</dd>
+
+    <dt class="col-sm-3">Telefon</dt>
+    <dd class="col-sm-9">@Model.PhoneNumber</dd>
+
+    <dt class="col-sm-3">Email</dt>
+    <dd class="col-sm-9">@Model.Email</dd>
+</dl>
+
+<a class="btn btn-secondary" href="@Url.Action("Index","Customers")">Powrót do listy</a>

@@ -1,11 +1,27 @@
-﻿@model Barber.Models.Appointment
+﻿@* Views/Appointments/Details.cshtml *@
+@model Barber.Models.Appointment
 
-<h2>Szczegóły Wizyty</h2>
+@{
+    ViewBag.Title = "Szczegóły Wizyty";
+}
 
-<p><strong>Klient:</strong> @Model.Customer.FirstName @Model.Customer.LastName</p>
-<p><strong>Usługa:</strong> @Model.Service.Name</p>
-<p><strong>Pracownik:</strong> @(Model.Employee != null ? Model.Employee.FirstName + " " + Model.Employee.LastName : "Brak")</p>
-<p><strong>Data:</strong> @Model.AppointmentDate</p>
-<p><strong>Status:</strong> @Model.Status</p>
+<h2 class="mb-4">Szczegóły Wizyty</h2>
 
-<a href="@Url.Action("Index","Appointments")">Powrót do listy</a>
+<dl class="row">
+    <dt class="col-sm-3">Klient</dt>
+    <dd class="col-sm-9">@Model.Customer?.FirstName @Model.Customer?.LastName</dd>
+
+    <dt class="col-sm-3">Usługa</dt>
+    <dd class="col-sm-9">@Model.Service?.Name</dd>
+
+    <dt class="col-sm-3">Pracownik</dt>
+    <dd class="col-sm-9">@(Model.Employee != null ? Model.Employee.FirstName + " " + Model.Employee.LastName : "Brak")</dd>
+
+    <dt class="col-sm-3">Data</dt>
+    <dd class="col-sm-9">@Model.AppointmentDate</dd>
+
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">@Model.Status</dd>
+</dl>
+
+<a class="btn btn-secondary" href="@Url.Action("Index","Appointments")">Powrót do listy</a>

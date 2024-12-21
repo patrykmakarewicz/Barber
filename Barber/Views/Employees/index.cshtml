@@ -1,27 +1,37 @@
-﻿@model IEnumerable<Barber.Models.Employee>
+﻿@* Views/Employees/Index.cshtml *@
+@model IEnumerable<Barber.Models.Employee>
 
-<h2>Lista Pracowników</h2>
+@{
+    ViewBag.Title = "Lista Pracowników";
+}
 
-<table>
-    <tr>
-        <th>Imię</th>
-        <th>Nazwisko</th>
-        <th>Specjalizacja</th>
-        <th>Akcje</th>
-    </tr>
-    @foreach (var e in Model)
-    {
+<h2 class="mb-4">Lista Pracowników</h2>
+<table class="table table-striped table-bordered table-hover align-middle">
+    <thead class="table-dark">
         <tr>
-            <td>@e.FirstName</td>
-            <td>@e.LastName</td>
-            <td>@e.Specialization</td>
-            <td>
-                <a href="@Url.Action("Edit","Employees", new { id=e.Id })">Edytuj</a> |
-                <a href="@Url.Action("Details","Employees", new { id=e.Id })">Szczegóły</a> |
-                <a href="@Url.Action("Delete","Employees", new { id=e.Id })">Usuń</a>
-            </td>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Specjalizacja</th>
+            <th style="width:220px;">Akcje</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.FirstName</td>
+                <td>@e.LastName</td>
+                <td>@e.Specialization</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" href="@Url.Action("Edit","Employees", new { id=e.Id })">Edytuj</a>
+                    <a class="btn btn-sm btn-info text-white" href="@Url.Action("Details","Employees", new { id=e.Id })">Szczegóły</a>
+                    <a class="btn btn-sm btn-danger" href="@Url.Action("Delete","Employees", new { id=e.Id })">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
-<a href="@Url.Action("Create","Employees")">Dodaj nowego pracownika</a>
+<div class="d-flex justify-content-end mt-3">
+    <a class="btn btn-success" href="@Url.Action("Create","Employees")">Dodaj nowego pracownika</a>
+</div>

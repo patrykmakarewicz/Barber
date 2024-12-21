@@ -1,20 +1,30 @@
-﻿@model Barber.Models.Employee
+﻿@* Views/Employees/Edit.cshtml *@
+@model Barber.Models.Employee
 
-<h2>Edytuj Pracownika</h2>
+@{
+    ViewBag.Title = "Edytuj Pracownika";
+}
 
-<form method="post">
+<h2 class="mb-4">Edytuj Pracownika</h2>
+@Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+<form method="post" class="row g-3">
     <input type="hidden" name="Id" value="@Model.Id" />
-    <label>Imię:</label>
-    <input type="text" name="FirstName" value="@Model.FirstName" />
-    <br />
+    <div class="col-md-6">
+        <label class="form-label">Imię:</label>
+        <input type="text" name="FirstName" class="form-control" value="@Model.FirstName" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Nazwisko:</label>
+        <input type="text" name="LastName" class="form-control" value="@Model.LastName" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Specjalizacja:</label>
+        <input type="text" name="Specialization" class="form-control" value="@Model.Specialization" />
+    </div>
 
-    <label>Nazwisko:</label>
-    <input type="text" name="LastName" value="@Model.LastName" />
-    <br />
-
-    <label>Specjalizacja:</label>
-    <input type="text" name="Specialization" value="@Model.Specialization" />
-    <br />
-
-    <input type="submit" value="Zapisz zmiany" />
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+        <a class="btn btn-secondary" href="@Url.Action("Index","Employees")">Anuluj</a>
+    </div>
 </form>

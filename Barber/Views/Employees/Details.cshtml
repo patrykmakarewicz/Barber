@@ -1,9 +1,21 @@
-﻿@model Barber.Models.Employee
+﻿@* Views/Employees/Details.cshtml *@
+@model Barber.Models.Employee
 
-<h2>Szczegóły Pracownika</h2>
+@{
+    ViewBag.Title = "Szczegóły Pracownika";
+}
 
-<p><strong>Imię:</strong> @Model.FirstName</p>
-<p><strong>Nazwisko:</strong> @Model.LastName</p>
-<p><strong>Specjalizacja:</strong> @Model.Specialization</p>
+<h2 class="mb-4">Szczegóły Pracownika</h2>
 
-<a href="@Url.Action("Index","Employees")">Powrót do listy</a>
+<dl class="row">
+    <dt class="col-sm-3">Imię</dt>
+    <dd class="col-sm-9">@Model.FirstName</dd>
+
+    <dt class="col-sm-3">Nazwisko</dt>
+    <dd class="col-sm-9">@Model.LastName</dd>
+
+    <dt class="col-sm-3">Specjalizacja</dt>
+    <dd class="col-sm-9">@Model.Specialization</dd>
+</dl>
+
+<a class="btn btn-secondary" href="@Url.Action("Index","Employees")">Powrót do listy</a>

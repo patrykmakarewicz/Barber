@@ -1,23 +1,33 @@
-﻿@model Barber.Models.Customer
+﻿@* Views/Customers/Create.cshtml *@
+@model Barber.Models.Customer
 
-<h2>Dodaj Klienta</h2>
+@{
+    ViewBag.Title = "Dodaj Klienta";
+}
 
-<form method="post">
-    <label>Imię:</label>
-    <input type="text" name="FirstName" />
-    <br />
+<h2 class="mb-4">Dodaj Klienta</h2>
+@Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
 
-    <label>Nazwisko:</label>
-    <input type="text" name="LastName" />
-    <br />
+<form method="post" class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Imię:</label>
+        <input type="text" name="FirstName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Nazwisko:</label>
+        <input type="text" name="LastName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Telefon:</label>
+        <input type="text" name="PhoneNumber" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Email:</label>
+        <input type="email" name="Email" class="form-control" />
+    </div>
 
-    <label>Telefon:</label>
-    <input type="text" name="PhoneNumber" />
-    <br />
-
-    <label>Email:</label>
-    <input type="email" name="Email" />
-    <br />
-
-    <input type="submit" value="Zapisz" />
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Zapisz</button>
+        <a class="btn btn-secondary" href="@Url.Action("Index","Customers")">Anuluj</a>
+    </div>
 </form>

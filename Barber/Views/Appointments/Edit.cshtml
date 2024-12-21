@@ -1,82 +1,98 @@
-﻿@model Barber.Models.Appointment
+﻿@* Views/Appointments/Edit.cshtml *@
+@model Barber.Models.Appointment
 
-<h2>Edytuj Wizytę</h2>
+@{
+    ViewBag.Title = "Edytuj Wizytę";
+}
 
-<form method="post">
+<h2 class="mb-4">Edytuj Wizytę</h2>
+
+@Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+<form method="post" class="row g-3">
     <input type="hidden" name="Id" value="@Model.Id" />
 
-    <label>Klient:</label>
-    <select name="CustomerId">
-        @foreach (var c in ViewBag.Customers)
-        {
-            var isCustomerSelected = (c.Id == Model.CustomerId);
-            if (isCustomerSelected)
+    <div class="col-md-4">
+        <label class="form-label">Klient:</label>
+        <select name="CustomerId" class="form-select">
+            @foreach (var c in ViewBag.Customers)
             {
-                <option value="@c.Id" selected="selected">@c.FirstName @c.LastName</option>
+                bool selected = (c.Id == Model.CustomerId);
+                if (selected)
+                {
+                    <option value="@c.Id" selected>@c.FirstName @c.LastName</option>
+                }
+                else
+                {
+                    <option value="@c.Id">@c.FirstName @c.LastName</option>
+                }
             }
-            else
-            {
-                <option value="@c.Id">@c.FirstName @c.LastName</option>
-            }
-        }
-    </select>
-    <br />
+        </select>
+    </div>
 
-    <label>Usługa:</label>
-    <select name="ServiceId">
-        @foreach (var s in ViewBag.Services)
-        {
-            var isServiceSelected = (s.Id == Model.ServiceId);
-            if (isServiceSelected)
+    <div class="col-md-4">
+        <label class="form-label">Usługa:</label>
+        <select name="ServiceId" class="form-select">
+            @foreach (var s in ViewBag.Services)
             {
-                <option value="@s.Id" selected="selected">@s.Name</option>
+                bool selected = (s.Id == Model.ServiceId);
+                if (selected)
+                {
+                    <option value="@s.Id" selected>@s.Name</option>
+                }
+                else
+                {
+                    <option value="@s.Id">@s.Name</option>
+                }
             }
-            else
-            {
-                <option value="@s.Id">@s.Name</option>
-            }
-        }
-    </select>
-    <br />
+        </select>
+    </div>
 
-    <label>Pracownik (opcjonalnie):</label>
-    <select name="EmployeeId">
-        <option value="">--Wybierz--</option>
-        @foreach (var e in ViewBag.Employees)
-        {
-            var isEmployeeSelected = (Model.EmployeeId.HasValue && e.Id == Model.EmployeeId);
-            if (isEmployeeSelected)
+    <div class="col-md-4">
+        <label class="form-label">Pracownik (opcjonalnie):</label>
+        <select name="EmployeeId" class="form-select">
+            <option value="">--Wybierz--</option>
+            @foreach (var emp in ViewBag.Employees)
             {
-                <option value="@e.Id" selected="selected">@e.FirstName @e.LastName</option>
+                bool selected = (Model.EmployeeId.HasValue && emp.Id == Model.EmployeeId);
+                if (selected)
+                {
+                    <option value="@emp.Id" selected>@emp.FirstName @emp.LastName</option>
+                }
+                else
+                {
+                    <option value="@emp.Id">@emp.FirstName @emp.LastName</option>
+                }
             }
-            else
-            {
-                <option value="@e.Id">@e.FirstName @e.LastName</option>
-            }
-        }
-    </select>
-    <br />
+        </select>
+    </div>
 
-    <label>Data wizyty:</label>
-    <input type="datetime-local" name="AppointmentDate" value="@Model.AppointmentDate.ToString("yyyy-MM-ddTHH:mm")" />
-    <br />
+    <div class="col-md-4">
+        <label class="form-label">Data wizyty:</label>
+        <input type="datetime-local" name="AppointmentDate" class="form-control"
+               value="@Model.AppointmentDate.ToString("yyyy-MM-ddTHH:mm")" />
+    </div>
 
-    <label>Status:</label>
-    <select name="Status">
-        @foreach (var status in Enum.GetValues(typeof(Barber.Models.AppointmentStatus)))
-        {
-            var isStatusSelected = (status.ToString() == Model.Status.ToString());
-            if (isStatusSelected)
+    <div class="col-md-4">
+        <label class="form-label">Status:</label>
+        <select name="Status" class="form-select">
+            @foreach (var status in Enum.GetValues(typeof(Barber.Models.AppointmentStatus)))
             {
-                <option value="@status" selected="selected">@status</option>
+                bool selected = (status.ToString() == Model.Status.ToString());
+                if (selected)
+                {
+                    <option value="@status" selected>@status</option>
+                }
+                else
+                {
+                    <option value="@status">@status</option>
+                }
             }
-            else
-            {
-                <option value="@status">@status</option>
-            }
-        }
-    </select>
-    <br />
+        </select>
+    </div>
 
-    <input type="submit" value="Zapisz zmiany" />
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+        <a class="btn btn-secondary" href="@Url.Action("Index","Appointments")">Anuluj</a>
+    </div>
 </form>
