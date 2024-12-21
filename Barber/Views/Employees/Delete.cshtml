@@ -1,0 +1,12 @@
+﻿@model Barber.Models.Employee
+
+<h2>Usuń Pracownika</h2>
+<p>Czy na pewno chcesz usunąć tego pracownika?</p>
+
+<p><strong>@Model.FirstName @Model.LastName</strong></p>
+<p>@Model.Specialization</p>
+
+<form method="post" action="@Url.Action("DeleteConfirmed","Employees", new { id = Model.Id })">
+    <input type="submit" value="Usuń" /> |
+    <a href="@Url.Action("Index","Employees")">Anuluj</a>
+</form>

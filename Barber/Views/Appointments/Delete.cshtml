@@ -1,0 +1,13 @@
+﻿@model Barber.Models.Appointment
+
+<h2>Usuń Wizytę</h2>
+<p>Czy na pewno chcesz usunąć tę wizytę?</p>
+
+<p><strong>Klient:</strong> @Model.Customer.FirstName @Model.Customer.LastName</p>
+<p><strong>Usługa:</strong> @Model.Service.Name</p>
+<p><strong>Data:</strong> @Model.AppointmentDate</p>
+
+<form method="post" action="@Url.Action("DeleteConfirmed","Appointments", new { id = Model.Id })">
+    <input type="submit" value="Usuń" /> |
+    <a href="@Url.Action("Index","Appointments")">Anuluj</a>
+</form>

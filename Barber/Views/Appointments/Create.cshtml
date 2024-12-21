@@ -1,0 +1,43 @@
+﻿@model Barber.Models.Appointment
+@{
+    ViewBag.Title = "Dodaj Wizytę";
+}
+@Html.ValidationSummary(true)
+
+<h2>Dodaj Wizytę</h2>
+
+<form method="post">
+    <label>Klient:</label>
+    <select name="CustomerId">
+        @foreach (var c in ViewBag.Customers)
+        {
+            <option value="@c.Id">@c.FirstName @c.LastName</option>
+        }
+    </select>
+    <br />
+
+    <label>Usługa:</label>
+    <select name="ServiceId">
+        @foreach (var s in ViewBag.Services)
+        {
+            <option value="@s.Id">@s.Name</option>
+        }
+    </select>
+    <br />
+
+    <label>Pracownik (opcjonalnie):</label>
+    <select name="EmployeeId">
+        <option value="">--Wybierz--</option>
+        @foreach (var e in ViewBag.Employees)
+        {
+            <option value="@e.Id">@e.FirstName @e.LastName</option>
+        }
+    </select>
+    <br />
+
+    <label>Data wizyty:</label>
+    <input type="datetime-local" name="AppointmentDate" />
+    <br />
+
+    <input type="submit" value="Zapisz" />
+</form>

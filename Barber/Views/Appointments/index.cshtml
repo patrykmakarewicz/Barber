@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Barber.Models.Appointment>
+
+<h2>Lista Wizyt</h2>
+
+<table>
+    <tr>
+        <th>Klient</th>
+        <th>Usługa</th>
+        <th>Pracownik</th>
+        <th>Data</th>
+        <th>Status</th>
+        <th>Akcje</th>
+    </tr>
+    @foreach (var appt in Model)
+    {
+        <tr>
+            <td>@(appt.Customer != null ? appt.Customer.FirstName + " " + appt.Customer.LastName : "")</td>
+            <td>@appt.Service?.Name</td>
+            <td>@(appt.Employee != null ? appt.Employee.FirstName + " " + appt.Employee.LastName : "Brak")</td>
+            <td>@appt.AppointmentDate</td>
+            <td>@appt.Status</td>
+            <td>
+                <a href="@Url.Action("Edit","Appointments", new { id=appt.Id })">Edytuj</a> |
+                <a href="@Url.Action("Delete","Appointments", new { id=appt.Id })">Usuń</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<a href="@Url.Action("Create","Appointments")">Dodaj nową wizytę</a>

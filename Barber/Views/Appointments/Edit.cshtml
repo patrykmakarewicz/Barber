@@ -1,0 +1,82 @@
+﻿@model Barber.Models.Appointment
+
+<h2>Edytuj Wizytę</h2>
+
+<form method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <label>Klient:</label>
+    <select name="CustomerId">
+        @foreach (var c in ViewBag.Customers)
+        {
+            var isCustomerSelected = (c.Id == Model.CustomerId);
+            if (isCustomerSelected)
+            {
+                <option value="@c.Id" selected="selected">@c.FirstName @c.LastName</option>
+            }
+            else
+            {
+                <option value="@c.Id">@c.FirstName @c.LastName</option>
+            }
+        }
+    </select>
+    <br />
+
+    <label>Usługa:</label>
+    <select name="ServiceId">
+        @foreach (var s in ViewBag.Services)
+        {
+            var isServiceSelected = (s.Id == Model.ServiceId);
+            if (isServiceSelected)
+            {
+                <option value="@s.Id" selected="selected">@s.Name</option>
+            }
+            else
+            {
+                <option value="@s.Id">@s.Name</option>
+            }
+        }
+    </select>
+    <br />
+
+    <label>Pracownik (opcjonalnie):</label>
+    <select name="EmployeeId">
+        <option value="">--Wybierz--</option>
+        @foreach (var e in ViewBag.Employees)
+        {
+            var isEmployeeSelected = (Model.EmployeeId.HasValue && e.Id == Model.EmployeeId);
+            if (isEmployeeSelected)
+            {
+                <option value="@e.Id" selected="selected">@e.FirstName @e.LastName</option>
+            }
+            else
+            {
+                <option value="@e.Id">@e.FirstName @e.LastName</option>
+            }
+        }
+    </select>
+    <br />
+
+    <label>Data wizyty:</label>
+    <input type="datetime-local" name="AppointmentDate" value="@Model.AppointmentDate.ToString("yyyy-MM-ddTHH:mm")" />
+    <br />
+
+    <label>Status:</label>
+    <select name="Status">
+        @foreach (var status in Enum.GetValues(typeof(Barber.Models.AppointmentStatus)))
+        {
+            var isStatusSelected = (status.ToString() == Model.Status.ToString());
+            if (isStatusSelected)
+            {
+                <option value="@status" selected="selected">@status</option>
+            }
+            else
+            {
+                <option value="@status">@status</option>
+            }
+        }
+    </select>
+    <br />
+
+    <input type="submit" value="Zapisz zmiany" />
+</form>

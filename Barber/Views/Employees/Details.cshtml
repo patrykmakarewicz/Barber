@@ -1,0 +1,9 @@
+﻿@model Barber.Models.Employee
+
+<h2>Szczegóły Pracownika</h2>
+
+<p><strong>Imię:</strong> @Model.FirstName</p>
+<p><strong>Nazwisko:</strong> @Model.LastName</p>
+<p><strong>Specjalizacja:</strong> @Model.Specialization</p>
+
+<a href="@Url.Action("Index","Employees")">Powrót do listy</a>

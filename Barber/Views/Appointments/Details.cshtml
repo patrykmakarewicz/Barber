@@ -1,0 +1,11 @@
+﻿@model Barber.Models.Appointment
+
+<h2>Szczegóły Wizyty</h2>
+
+<p><strong>Klient:</strong> @Model.Customer.FirstName @Model.Customer.LastName</p>
+<p><strong>Usługa:</strong> @Model.Service.Name</p>
+<p><strong>Pracownik:</strong> @(Model.Employee != null ? Model.Employee.FirstName + " " + Model.Employee.LastName : "Brak")</p>
+<p><strong>Data:</strong> @Model.AppointmentDate</p>
+<p><strong>Status:</strong> @Model.Status</p>
+
+<a href="@Url.Action("Index","Appointments")">Powrót do listy</a>

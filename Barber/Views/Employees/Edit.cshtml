@@ -1,0 +1,20 @@
+﻿@model Barber.Models.Employee
+
+<h2>Edytuj Pracownika</h2>
+
+<form method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <label>Imię:</label>
+    <input type="text" name="FirstName" value="@Model.FirstName" />
+    <br />
+
+    <label>Nazwisko:</label>
+    <input type="text" name="LastName" value="@Model.LastName" />
+    <br />
+
+    <label>Specjalizacja:</label>
+    <input type="text" name="Specialization" value="@Model.Specialization" />
+    <br />
+
+    <input type="submit" value="Zapisz zmiany" />
+</form>

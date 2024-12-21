@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Barber.Models.Employee>
+
+<h2>Lista Pracowników</h2>
+
+<table>
+    <tr>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Specjalizacja</th>
+        <th>Akcje</th>
+    </tr>
+    @foreach (var e in Model)
+    {
+        <tr>
+            <td>@e.FirstName</td>
+            <td>@e.LastName</td>
+            <td>@e.Specialization</td>
+            <td>
+                <a href="@Url.Action("Edit","Employees", new { id=e.Id })">Edytuj</a> |
+                <a href="@Url.Action("Details","Employees", new { id=e.Id })">Szczegóły</a> |
+                <a href="@Url.Action("Delete","Employees", new { id=e.Id })">Usuń</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<a href="@Url.Action("Create","Employees")">Dodaj nowego pracownika</a>

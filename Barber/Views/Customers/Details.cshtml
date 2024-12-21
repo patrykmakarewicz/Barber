@@ -1,0 +1,10 @@
+﻿@model Barber.Models.Customer
+
+<h2>Szczegóły Klienta</h2>
+
+<p><strong>Imię:</strong> @Model.FirstName</p>
+<p><strong>Nazwisko:</strong> @Model.LastName</p>
+<p><strong>Telefon:</strong> @Model.PhoneNumber</p>
+<p><strong>Email:</strong> @Model.Email</p>
+
+<a href="@Url.Action("Index","Customers")">Powrót do listy</a>

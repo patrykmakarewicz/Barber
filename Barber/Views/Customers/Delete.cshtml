@@ -1,0 +1,11 @@
+﻿@model Barber.Models.Customer
+
+<h2>Usuń Klienta</h2>
+<p>Czy na pewno chcesz usunąć tego klienta?</p>
+
+<p><strong>@Model.FirstName @Model.LastName</strong></p>
+
+<form method="post" action="@Url.Action("index","Customers", new { id = Model.Id })">
+    <input type="submit" value="Usuń" /> |
+    <a href="@Url.Action("Index","Customers")">Anuluj</a>
+</form>

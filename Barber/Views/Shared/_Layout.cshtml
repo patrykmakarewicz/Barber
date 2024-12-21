@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Barber Salon</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul style="list-style-type:none; display:flex; gap:20px; padding:10px; background-color:#f0f0f0;">
+                <li><a href="@Url.Action("Index","Appointments")">Wizyty</a></li>
+                <li><a href="@Url.Action("Index","Customers")">Klienci</a></li>
+                <li><a href="@Url.Action("Index","Employees")">Pracownicy</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container" style="margin:20px;">
+        @RenderBody()
+    </div>
+
+    <footer style="margin:20px;">
+        <p>&copy; 2024 - Barber Salon</p>
+    </footer>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

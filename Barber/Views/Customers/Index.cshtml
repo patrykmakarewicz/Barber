@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Barber.Models.Customer>
+
+<h2>Lista Klientów</h2>
+
+<table>
+    <tr>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Telefon</th>
+        <th>Email</th>
+        <th>Akcje</th>
+    </tr>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.FirstName</td>
+            <td>@c.LastName</td>
+            <td>@c.PhoneNumber</td>
+            <td>@c.Email</td>
+            <td>
+                <a href="@Url.Action("Edit","Customers", new { id=c.Id })">Edytuj</a> |
+                <a href="@Url.Action("Details","Customers", new { id=c.Id })">Szczegóły</a> |
+                <a href="@Url.Action("Delete","Customers", new { id=c.Id })">Usuń</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<a href="@Url.Action("Create","Customers")">Dodaj nowego klienta</a>

@@ -1,0 +1,24 @@
+﻿@model Barber.Models.Customer
+
+<h2>Edytuj Klienta</h2>
+
+<form method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <label>Imię:</label>
+    <input type="text" name="FirstName" value="@Model.FirstName" />
+    <br />
+
+    <label>Nazwisko:</label>
+    <input type="text" name="LastName" value="@Model.LastName" />
+    <br />
+
+    <label>Telefon:</label>
+    <input type="text" name="PhoneNumber" value="@Model.PhoneNumber" />
+    <br />
+
+    <label>Email:</label>
+    <input type="email" name="Email" value="@Model.Email" />
+    <br />
+
+    <input type="submit" value="Zapisz zmiany" />
+</form>
